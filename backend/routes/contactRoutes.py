@@ -5,6 +5,8 @@ contact_bp = Blueprint('contact', __name__)
 
 @contact_bp.route('/', methods=['POST', 'OPTIONS'])
 def create():
+    if request.method == 'OPTIONS':
+        return '', 204
     data = request.get_json()
     contact = create_contact(data)
     return jsonify({"message": "Contacto creado", "id": contact["id"]}), 201
